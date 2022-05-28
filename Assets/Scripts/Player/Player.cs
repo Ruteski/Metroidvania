@@ -8,10 +8,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _jumpForce = 10f;
     [SerializeField] private Animator _anim;
+    [SerializeField] private Transform _point;
+    [SerializeField] private float _pointRadius;
 
     private Rigidbody2D _rb;
     private bool _isJumping = false;
     private bool _doubleJump = false;
+    private bool _isAttacking = false;
 
     // Start is called before the first frame update
     void Start()    
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Jump();
+        Attack();
     }
 
     private void FixedUpdate() {
@@ -49,7 +53,7 @@ public class Player : MonoBehaviour
         } 
         
         
-        if (movement == 0 && !_isJumping) {
+        if (movement == 0 && !_isJumping && !_isAttacking) {
             _anim.SetInteger("Transition", 0);
         }
     }
@@ -76,5 +80,32 @@ public class Player : MonoBehaviour
             _isJumping = false;
             
         }
+    }
+
+    private void Attack() {
+        if (Input.GetButtonDown("Fire1")) {
+            _isAttacking = true;
+            _anim.SetInteger("Transition", 3);
+
+            //objeto que estou colidindo 
+            Collider2D hit = Physics2D.OverlapCircle(_point.position, _pointRadius);
+                                      // cria um colider de circulo na posicao do point
+
+            if (hit != null) {
+                print(hit.name);
+            }
+
+            StartCoroutine(OnAttack());
+        }
+    }
+
+    IEnumerator OnAttack() {
+        yield return new WaitForSeconds(0.333f);
+        _isAttacking = false;
+
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(_point.position, _pointRadius);
     }
 }
