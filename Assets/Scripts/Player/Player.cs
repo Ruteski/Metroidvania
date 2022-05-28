@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private bool _isJumping = false;
     private bool _doubleJump = false;
     private bool _isAttacking = false;
+    private float _recoveryCount = 0;
 
     // Start is called before the first frame update
     void Start()    
@@ -114,8 +115,13 @@ public class Player : MonoBehaviour
     }
 
     public void OnHit() {
-        _anim.SetTrigger("Hit");
-        _health--;
+        _recoveryCount += Time.deltaTime;
+
+        if (_recoveryCount > 2f) {
+            _anim.SetTrigger("Hit");
+            _health--;
+            _recoveryCount = 0;
+        }
 
         if (_health <= 0) {
             _speed = 0;
