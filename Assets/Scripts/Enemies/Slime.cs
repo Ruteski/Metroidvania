@@ -22,12 +22,6 @@ public class Slime : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate() {
         _rb.velocity = new Vector2(_speed *-1, _rb.velocity.y);
         OnCollision();

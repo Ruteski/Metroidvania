@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 109167180}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 1544875272}
   - component: {fileID: 1544875274}
   - component: {fileID: 1544875275}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,6 +814,7 @@ MonoBehaviour:
   _pointBehind: {fileID: 1700325859}
   _isRight: 1
   _stopDistance: 0.7
+  _health: 3
 --- !u!95 &1544875275
 Animator:
   serializedVersion: 4
@@ -843,7 +844,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1700325859}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pointbehind
   m_TagString: Untagged
   m_Icon: {fileID: 0}

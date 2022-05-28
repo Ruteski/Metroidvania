@@ -11,6 +11,7 @@ public class Goblin : MonoBehaviour
     [SerializeField] private Transform _pointBehind;
     [SerializeField] private bool _isRight = true;
     [SerializeField] private float _stopDistance;
+    [SerializeField] private int _health = 3;
     
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -74,12 +75,15 @@ public class Goblin : MonoBehaviour
             }
         }
 
+
+        //raycast das costas do inimigo
         RaycastHit2D behindhit = Physics2D.Raycast(_pointBehind.position, -_direction, _maxVision);
 
         if (behindhit.collider != null) {
             if (behindhit.transform.CompareTag("Player")) {
                 //player nas costas do inimigo
                 _isRight = !_isRight;
+                _isFront = true;
             }
         }
     }
@@ -96,4 +100,16 @@ public class Goblin : MonoBehaviour
         //Gizmos.DrawRay(_point.position, _direction * _maxVision);
         //Debug.DrawRay(_point.position, _direction * _maxVision, Color.red);
     }
+
+    public void OnHit() {
+        _animator.SetTrigger("Hit");
+        _health--;
+
+        if (_health <= 0) {
+            _speed = 0;
+            _animator.SetTrigger("Death");
+            Destroy(gameObject, 0.6f);
+        }
+    }
+
 }

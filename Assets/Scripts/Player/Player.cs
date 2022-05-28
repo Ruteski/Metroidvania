@@ -98,7 +98,11 @@ public class Player : MonoBehaviour
                                       // cria um colider de circulo na posicao do point
 
             if (hit != null) {
-                hit.GetComponent<Slime>().OnHit();
+                if (hit.GetComponent<Slime>()) {
+                    hit.GetComponent<Slime>().OnHit();
+                }else if (hit.GetComponent<Goblin>()) {
+                    hit.GetComponent<Goblin>().OnHit();
+                }
             }
 
             StartCoroutine(OnAttack());
