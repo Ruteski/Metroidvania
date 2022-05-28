@@ -10,8 +10,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private Transform _point;
     [SerializeField] private float _pointRadius;
+    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private int _health;
 
     private Rigidbody2D _rb;
+
     private bool _isJumping = false;
     private bool _doubleJump = false;
     private bool _isAttacking = false;
@@ -88,11 +91,11 @@ public class Player : MonoBehaviour
             _anim.SetInteger("Transition", 3);
 
             //objeto que estou colidindo 
-            Collider2D hit = Physics2D.OverlapCircle(_point.position, _pointRadius);
+            Collider2D hit = Physics2D.OverlapCircle(_point.position, _pointRadius, _enemyLayer);//so vai dar dano se for um inimigo
                                       // cria um colider de circulo na posicao do point
 
             if (hit != null) {
-                print(hit.name);
+                hit.GetComponent<Slime>().OnHit();
             }
 
             StartCoroutine(OnAttack());
@@ -107,4 +110,25 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos() {
         Gizmos.DrawWireSphere(_point.position, _pointRadius);
     }
+
+    public void OnHit() {
+        _anim.SetTrigger("Hit");
+        _health--;
+
+        if (_health <= 0) {
+            _speed = 0;
+            _anim.SetTrigger("Death");
+            Destroy(gameObject, 0.7f);
+
+            // TODO game over aqui
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.layer == 7) {
+            OnHit();
+        }
+    }
+
+
 }

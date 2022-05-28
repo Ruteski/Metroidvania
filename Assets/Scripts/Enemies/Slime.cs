@@ -9,14 +9,17 @@ public class Slime : MonoBehaviour
     [SerializeField] private Transform _point;
     [SerializeField] private LayerMask layer;// me permite selecionar uma layer no inpector
     [SerializeField] private float _pointRadius;
+    [SerializeField] private int _health;
 
     private Rigidbody2D _rb;
+    private Animator _animator;
     
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -48,4 +51,16 @@ public class Slime : MonoBehaviour
     private void OnDrawGizmos() {
         Gizmos.DrawWireSphere(_point.position, _pointRadius);
     }
+
+    public void OnHit() {
+        _animator.SetTrigger("Hit");
+        _health--;
+
+        if (_health <= 0) {
+            _speed = 0;
+            _animator.SetTrigger("Death");
+            Destroy(gameObject, 0.7f);
+        }
+    }
+ 
 }
