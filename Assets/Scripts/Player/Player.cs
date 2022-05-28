@@ -39,13 +39,13 @@ public class Player : MonoBehaviour
         _rb.velocity = new Vector2(movement * _speed, _rb.velocity.y);
 
         if (movement > 0) {
-            if (!_isJumping) {
+            if (!_isJumping && !_isAttacking) {
                 _anim.SetInteger("Transition", 1);
             }
             
             transform.eulerAngles = new Vector3(0, 0, 0);
         } else if (movement < 0) {
-            if (!_isJumping) {
+            if (!_isJumping && !_isAttacking) {
                 _anim.SetInteger("Transition", 1);
             }
             
@@ -102,7 +102,6 @@ public class Player : MonoBehaviour
     IEnumerator OnAttack() {
         yield return new WaitForSeconds(0.333f);
         _isAttacking = false;
-
     }
 
     private void OnDrawGizmos() {
