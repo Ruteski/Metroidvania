@@ -675,6 +675,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _jumpForce: 10
+  _anim: {fileID: 1642739402}
 --- !u!70 &1634298962
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -706,7 +708,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -722,6 +724,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1642739400}
   - component: {fileID: 1642739401}
+  - component: {fileID: 1642739402}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -796,6 +799,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1642739402
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642739399}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ecdb831dfea9777439645beca5b3c2d5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1715925370
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +917,7 @@ GameObject:
   - component: {fileID: 1791108100}
   - component: {fileID: 1791108099}
   - component: {fileID: 1791108098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
