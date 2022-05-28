@@ -86,6 +86,8 @@ public class Player : MonoBehaviour
     }
 
     private void Attack() {
+        //TODO: implementar tempo de espera para tomar dano novamente
+         
         if (Input.GetButtonDown("Fire1")) {
             _isAttacking = true;
             _anim.SetInteger("Transition", 3);
@@ -120,7 +122,7 @@ public class Player : MonoBehaviour
             _anim.SetTrigger("Death");
             Destroy(gameObject, 0.7f);
 
-            // TODO game over aqui
+            //TODO: game over aqui
         }
     }
 
