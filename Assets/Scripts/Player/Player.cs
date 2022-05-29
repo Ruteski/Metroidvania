@@ -140,6 +140,12 @@ public class Player : MonoBehaviour
         if (collision.gameObject.layer == 7) {
             OnHit();
         }
+
+        if (collision.CompareTag("Coin")) {
+            collision.GetComponent<Animator>().SetTrigger("Pickup");
+            GameManager.instance.GetCoin();
+            Destroy(collision.gameObject, 0.360f);
+        }
     }
 
 
