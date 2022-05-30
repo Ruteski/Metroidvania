@@ -2,26 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour
+public class Buttonlvl2Controller : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private Animator _barrierAnimator;
-    //[SerializeField] private LayerMask layer;
+    private string _nameButton;
+
 
     private void Start() {
-        _animator = GetComponent<Animator>();   
+        _animator = GetComponent<Animator>();
+        _nameButton = gameObject.name;
     }
 
     private void OnPressed() {
-        print("onpressed");
-        _animator.SetBool("isPressed", true);
-        _barrierAnimator.SetBool("Down", true);
+        if (_nameButton == "Button1"){
+            //_animator.SetBool("isPressed", true);
+            _barrierAnimator.SetBool("Down", true); 
+        } else {
+            //_animator.SetBool("isPressed", true);
+            _barrierAnimator.SetBool("Up", true);
+        }
     }
 
     private void OnReleased() {
-        print("onreleased");
-        _animator.SetBool("isPressed", false);
-        _barrierAnimator.SetBool("Down", false);
+        if (_nameButton == "Button1") {
+            //_animator.SetBool("isPressed", false);
+            _barrierAnimator.SetBool("Down", false); 
+        } else {
+            //_animator.SetBool("isPressed", true);
+            //_barrierAnimator.SetBool("Up", true);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
@@ -35,8 +45,6 @@ public class ButtonController : MonoBehaviour
             OnReleased();
         }
     }
-
-
 
     //private void OnCollision() {
     //    //objeto que estou colidindo 
