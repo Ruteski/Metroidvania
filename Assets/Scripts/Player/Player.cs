@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _point;
     [SerializeField] private float _pointRadius;
     [SerializeField] private LayerMask _enemyLayer;
-    [SerializeField] private int _health;
+    [SerializeField] private Health _healthSystem;
 
     private Rigidbody2D _rb;
 
@@ -24,12 +24,13 @@ public class Player : MonoBehaviour
     private static Player instance;
 
     private void Awake() {
-        DontDestroyOnLoad(this);//mantem objeto entre as cenas
-
         if (instance == null) {//checa se ja existe um outro player na cena
             instance = this;
-        } else {
-            Destroy(instance);
+            DontDestroyOnLoad(gameObject);
+        } else if (instance != this) {
+            Destroy(instance.gameObject);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerAudio = GetComponent<Audio>();
+        _healthSystem = GetComponent<Health>();
     }
 
     // Update is called once per frame
@@ -141,16 +143,16 @@ public class Player : MonoBehaviour
 
         if (_recoveryCount > 2f) {
             _anim.SetTrigger("Hit");
-            _health--;
+            _healthSystem.health--;
             _recoveryCount = 0;
         }
 
-        if (_health <= 0) {
+        if (_healthSystem.health <= 0) {
             _speed = 0;
             _anim.SetTrigger("Death");
             Destroy(gameObject, 0.7f);
 
-            //TODO: game over aqui
+            GameManager.instance.ShowGameOver();
         }
     }
 

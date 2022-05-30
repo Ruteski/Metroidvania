@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 //SINGLETON
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _gameOverPanel;
+
     public int score;
     public Text scoreText;
 
@@ -22,6 +24,8 @@ public class GameManager : MonoBehaviour
         //    Destroy(gameObject);
         //}
 
+        Time.timeScale = 1;
+
         if (PlayerPrefs.GetInt("Score") > 0) {
             scoreText.text = "x " + PlayerPrefs.GetInt("Score").ToString();
         }
@@ -36,5 +40,14 @@ public class GameManager : MonoBehaviour
 
     public void NextLvl() {
         SceneManager.LoadScene(1);
+    }
+
+    public void ShowGameOver() {
+        Time.timeScale = 0;
+        _gameOverPanel.SetActive(true);        
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
