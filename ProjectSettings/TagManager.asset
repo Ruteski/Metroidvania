@@ -7,6 +7,7 @@ TagManager:
   - Coin
   - Stone
   - Door
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

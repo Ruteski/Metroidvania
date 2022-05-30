@@ -162,6 +162,10 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Door")) {
             GameManager.instance.NextLvl();
         }
+
+        if (collision.CompareTag("CheckPoint")) {
+            Respaw.instance.CheckPoint();
+        }
     }
 
 
