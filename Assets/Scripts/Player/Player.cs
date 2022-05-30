@@ -168,10 +168,6 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject, 0.360f);
         }
 
-        if (collision.CompareTag("Door")) {
-            GameManager.instance.NextLvl();
-        }
-
         if (collision.CompareTag("CheckPoint")) {
             Respaw.instance.CheckPoint();
         }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake() {
         instance = this;
+        
         //DontDestroyOnLoad(this);
 
         //if (instance == null) {
@@ -36,10 +37,6 @@ public class GameManager : MonoBehaviour
         scoreText.text =  "x " + score.ToString();
 
         PlayerPrefs.SetInt("Score", score);
-    }
-
-    public void NextLvl() {
-        SceneManager.LoadScene(2);
     }
 
     public void ShowGameOver() {
