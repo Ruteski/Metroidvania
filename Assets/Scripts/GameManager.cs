@@ -13,25 +13,25 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private void Awake() {
-        //instance = this;
-        DontDestroyOnLoad(this);
+        instance = this;
+        //DontDestroyOnLoad(this);
 
-        if (instance == null) {
-            instance = this;
-        } else {
-            Destroy(gameObject);
+        //if (instance == null) {
+        //    instance = this;
+        //} else {
+        //    Destroy(gameObject);
+        //}
+
+        if (PlayerPrefs.GetInt("Score") > 0) {
+            scoreText.text = "x " + PlayerPrefs.GetInt("Score").ToString();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void GetCoin() {
         score++;
         scoreText.text =  "x " + score.ToString();
+
+        PlayerPrefs.SetInt("Score", score);
     }
 
     public void NextLvl() {
