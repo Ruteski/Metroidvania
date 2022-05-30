@@ -13,13 +13,11 @@ public class ButtonController : MonoBehaviour
     }
 
     private void OnPressed() {
-        print("onpressed");
         _animator.SetBool("isPressed", true);
         _barrierAnimator.SetBool("Down", true);
     }
 
     private void OnReleased() {
-        print("onreleased");
         _animator.SetBool("isPressed", false);
         _barrierAnimator.SetBool("Down", false);
     }

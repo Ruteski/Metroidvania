@@ -45,24 +45,4 @@ public class Buttonlvl2Controller : MonoBehaviour
             OnReleased();
         }
     }
-
-    //private void OnCollision() {
-    //    //objeto que estou colidindo 
-    //    Collider2D hit = Physics2D.OverlapCircle(transform.position, 1, layer);// layer da colisao()
-    //    // cria um colider de circulo na posicao do point
-
-    //    if (hit != null) {
-    //        OnPressed();
-    //        hit = null;
-    //    } else {
-    //        OnReleased();
-    //    }
-
-    //}
-
-    ////esse metodo aparece 100% do tempo - OnDrawGizmos
-    //private void OnDrawGizmos() {
-    //    //Debug.DrawRay(transform.position, _direction * 1, Color.red);
-    //    Gizmos.DrawWireSphere(transform.position, 1);
-    //}
 }

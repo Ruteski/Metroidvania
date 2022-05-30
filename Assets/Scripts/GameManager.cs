@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //SINGLETON
 public class GameManager : MonoBehaviour
@@ -12,7 +13,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private void Awake() {
-        instance = this;
+        //instance = this;
+        DontDestroyOnLoad(this);
+
+        if (instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -24,5 +32,9 @@ public class GameManager : MonoBehaviour
     public void GetCoin() {
         score++;
         scoreText.text =  "x " + score.ToString();
+    }
+
+    public void NextLvl() {
+        SceneManager.LoadScene(1);
     }
 }

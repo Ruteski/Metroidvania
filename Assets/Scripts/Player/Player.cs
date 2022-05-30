@@ -20,6 +20,18 @@ public class Player : MonoBehaviour
     private bool _isAttacking = false;
     private float _recoveryCount = 0;
 
+    private static Player instance;
+
+    private void Awake() {
+        DontDestroyOnLoad(this);//mantem objeto entre as cenas
+
+        if (instance == null) {//checa se ja existe um outro player na cena
+            instance = this;
+        } else {
+            Destroy(instance);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()    
     {
@@ -145,6 +157,10 @@ public class Player : MonoBehaviour
             collision.GetComponent<Animator>().SetTrigger("Pickup");
             GameManager.instance.GetCoin();
             Destroy(collision.gameObject, 0.360f);
+        }
+
+        if (collision.CompareTag("Door")) {
+            GameManager.instance.NextLvl();
         }
     }
 
