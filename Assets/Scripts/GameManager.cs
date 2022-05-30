@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextLvl() {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void ShowGameOver() {
