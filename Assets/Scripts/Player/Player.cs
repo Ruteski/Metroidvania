@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private bool _doubleJump = false;
     private bool _isAttacking = false;
     private float _recoveryCount = 0;
+    private Audio _playerAudio;
 
     private static Player instance;
 
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
     void Start()    
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerAudio = GetComponent<Audio>();
     }
 
     // Update is called once per frame
@@ -76,17 +78,22 @@ public class Player : MonoBehaviour
 
     private void Jump() {
         if (Input.GetButtonDown("Jump")) {
+            
+
             if (!_isJumping) {
                 _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
 
                 _anim.SetInteger("Transition", 2);
                 _isJumping = true;
                 _doubleJump = true;
+                _playerAudio.PlaySFX(_playerAudio.jumSound);
             } else if (_doubleJump) {
                 _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
 
                 _anim.SetInteger("Transition", 2);
                 _doubleJump = false;
+                _playerAudio.PlaySFX(_playerAudio.jumSound);
+
             }
         }
     }
@@ -99,9 +106,8 @@ public class Player : MonoBehaviour
     }
 
     private void Attack() {
-        //TODO: implementar tempo de espera para tomar dano novamente
-         
         if (Input.GetButtonDown("Fire1")) {
+            _playerAudio.PlaySFX(_playerAudio.hitSound);
             _isAttacking = true;
             _anim.SetInteger("Transition", 3);
 
@@ -154,6 +160,7 @@ public class Player : MonoBehaviour
         }
 
         if (collision.CompareTag("Coin")) {
+            _playerAudio.PlaySFX(_playerAudio.coinSound);
             collision.GetComponent<Animator>().SetTrigger("Pickup");
             GameManager.instance.GetCoin();
             Destroy(collision.gameObject, 0.360f);
