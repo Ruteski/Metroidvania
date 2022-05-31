@@ -15,18 +15,20 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private void Awake() {
-        instance = this;
+        //instance = this;
         
-        //DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
 
-        //if (instance == null) {
-        //    instance = this;
-        //} else {
-        //    Destroy(gameObject);
-        //}
+        if (instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+        }
 
         Time.timeScale = 1;
+    }
 
+    private void Start() {
         if (PlayerPrefs.GetInt("Score") > 0) {
             scoreText.text = "x " + PlayerPrefs.GetInt("Score").ToString();
         }
